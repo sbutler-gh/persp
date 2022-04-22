@@ -3,7 +3,8 @@ import supabase from '$lib/db';
 
 
 
-export async function post(request) {
+export async function post({ request }) {
+  const body = await await request.formData();
 
   console.log('submitting json');
   console.log(request);
@@ -15,13 +16,13 @@ export async function post(request) {
   .from('initiatives')
   .insert([
     { 
-      lng: request.body.get('lng'),
-      lat: request.body.get('lat'),
-      lng_lat: request.body.get('lng_lat'),
+      lng: body.get('lng'),
+      lat: body.get('lat'),
+      lng_lat: body.get('lng_lat'),
       // name: request.body.get('title'),
-      name: request.body.get('name'),
-      impact: request.body.get('impact'),
-      perspective: request.body.get('perspective')
+      name: body.get('name'),
+      impact: body.get('impact'),
+      perspective: body.get('perspective')
     //   geojson_feature: geojson_feature,
     //   geo_id: request.body.get('geo_id'),
     //   geo_index: 'osm',
